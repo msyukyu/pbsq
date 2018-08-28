@@ -40,7 +40,7 @@ t_map	*ft_check_map(t_map *map)
 			h++;
 			if (w == nb_check)
 				nb_check = 0;
-			else
+			else if (h > 2)
 				return (NULL);
 		}
 		if (h == 1)
@@ -64,6 +64,7 @@ t_map	*ft_check_map(t_map *map)
 	nb_check = ft_atoi(map->map);
 	if (nb_check == h - 1 && cons_length == 3)
 		return (map);
+	free(map);
 	return (NULL);
 }
 
@@ -103,7 +104,10 @@ int		main(int argc, char *argv[])
 			if (map == NULL)
 				write(1, "map error\n", 10);
 			else
-				ft_solve_map(map);
+			{
+				write(1, "solvemap", 8);
+			//	ft_solve_map(map);
+			}
 		}
 	}
 	return (0);
