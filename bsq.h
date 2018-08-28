@@ -40,6 +40,6 @@ t_square    		*ft_copy_square(t_square *square);
 void        		ft_print_filled_map(t_square *best_square, t_map *map);
 void        		ft_solve_map(t_map *map);
 t_map				*ft_read_map(int fd);
-t_map				*ft_check_map(t_map *map, int w, int h);
+t_map				*ft_check_map(t_map *map);
 char				*ft_malloc(char *str, int n_read, int n_buff, char *buff);
 #endif

@@ -12,6 +12,8 @@ t_map	*ft_read_map(int	fd)
 
 	map = malloc(sizeof(t_map));
 	n_buff = -1;
+	map->map = malloc(sizeof(char));
+	map->map[0] = '\0';
 	while ((n_read = read(fd, buff, BUFF_SIZE)) > 0 && ++n_buff > -1)
 		map->map = ft_malloc(map->map, n_read, n_buff, buff);
 	printf("%s\n", map->map); // test
@@ -64,7 +66,6 @@ t_map	*ft_check_map(t_map *map)
 	nb_check = ft_atoi(map->map);
 	if (nb_check == h - 1 && cons_length == 3)
 		return (map);
-	free(map);
 	return (NULL);
 }
 
