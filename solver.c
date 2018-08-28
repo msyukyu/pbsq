@@ -8,7 +8,7 @@ int			ft_find_x_obs(t_square *square, t_map *map)
 
 	x_max = -1;
 	y = square->ys - 1;
-	while (++y < square->ys + square->side -1 )
+	while (++y < square->ys + square->side)
 	{
 		obs = map->obs[y];
 		while (obs != NULL)
