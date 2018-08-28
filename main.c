@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: dabeloos <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/28 11:45:46 by dabeloos          #+#    #+#             */
-/*   Updated: 2018/08/28 13:10:49 by rhunders         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "bsq.h"
 
@@ -28,8 +17,7 @@ char *ft_malloc(char *str, int ret, int size)
 {
 	char *tmp_str;
 
-	tmp_str = malloc(sizeof(char) * (size * BUFF_SIZE + ret));
-	
+	tmp_str = malloc(sizeof(char) * (size * BUFF_SIZE + ret));	
 }
 
 void str_cpy(char *dest, char *src)
