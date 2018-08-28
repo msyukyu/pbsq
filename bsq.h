@@ -34,4 +34,10 @@ void				ft_putchar(char *str);
 void				ft_putstr(char *str);
 char				*ft_strcat(char *dest, char *src);
 void				ft_strcpy(char *dest, char *src);
+
+int         ft_find_x_obs(t_square *square, t_map *map);
+t_square    *ft_init_square(void);
+t_square    *ft_copy_square(t_square square);
+void        ft_print_filled_map(t_square best_square, t_map map);
+void        ft_solve_map(t_map *map);
 #endif
