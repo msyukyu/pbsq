@@ -2,8 +2,6 @@
 #ifndef BSQ_H
 # define BSQ_H
 # define BUFFER_SIZE 4096
-# define MAP_H map->ye + 1
-# define MAP_W map->xe + 1
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
@@ -12,8 +10,8 @@ typedef struct		s_square
 {
 	int				xs;
 	int				ys;
-	int				xe;
-	int				ye;
+	int				w;
+	int				h;
 }					t_square;
 typedef struct		s_obs
 {
@@ -24,8 +22,8 @@ typedef struct		s_map
 {
 	int				xs;
 	int				ys;
-	int				xe;
-	int				ye;
+	int				w;
+	int				h;
 	char			*map;
 	t_obs			**obs;
 }					t_map;
