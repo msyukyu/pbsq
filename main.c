@@ -28,7 +28,7 @@ t_map	*ft_check_map(t_map *map)
 	int nb_check;
 	int	w;
 	int	h;
-	
+
 	w = 0;
 	h = 0;
 	cons_length = 0;
@@ -37,31 +37,40 @@ t_map	*ft_check_map(t_map *map)
 	nb_check = 0;
 	while(map->map[++i])
 	{
-		if (map->map[i] == '\n')
+		if (map->map[i] == map->c_full ||
+					map->map[i] == map->c_obs || map->map[i] == map->c_empty || h == 0 || map->map[i] =='\n')
 		{
-			h++;
-			if (w == nb_check)
-				nb_check = 0;
-			else if (h > 2)
-				return (NULL);
-		}
-		if (h == 1)
-			w++;
-		else if (h != 0)
-			nb_check++;
-		if (h == 0)
-		{
-			if (map->map[i] > '9' || map->map[i] < '0')
+			if (map->map[i] == '\n')
 			{
-				if (cons_length % 3 == 0)
-					map->c_empty = map->map[i];
-				else if (cons_length % 3 == 1)
-					map->c_obs = map->map[i];
-				else
-					map->c_full = map->map[i];
-				cons_length++;
+				h++;
+				if (w == nb_check)
+					nb_check = 0;
+				else if (h > 2)
+					return (NULL);
+			}
+			if (h == 1)
+				w++;
+			else if (h != 0)
+				nb_check++;
+			if (h == 0)
+			{
+				if (map->map[i] > '9' || map->map[i] < '0')
+				{
+					if (cons_length % 3 == 0)
+						map->c_empty = map->map[i];
+					else if (cons_length % 3 == 1)
+						map->c_obs = map->map[i];
+					else
+						map->c_full = map->map[i];
+					cons_length++;
+					if (cons_length == 3 && (map->c_full == map->c_obs ||
+								map->c_full == map->c_empty || map->c_obs == map->c_empty))
+						return (NULL);
+				}
 			}
 		}
+		else
+			return (NULL);
 	}
 	nb_check = ft_atoi(map->map);
 	if (nb_check == h - 1 && cons_length == 3)
@@ -107,7 +116,7 @@ int		main(int argc, char *argv[])
 			else
 			{
 				write(1, "solvemap", 8);
-			//	ft_solve_map(map);
+				//	ft_solve_map(map);
 			}
 		}
 	}
