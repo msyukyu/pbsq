@@ -6,7 +6,7 @@
 /*   By: rhunders <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/28 11:45:37 by rhunders          #+#    #+#             */
-/*   Updated: 2018/08/28 12:34:44 by dabeloos         ###   ########.fr       */
+/*   Updated: 2018/08/28 12:41:52 by dabeloos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,6 @@ typedef struct		s_map
 	char			*map;
 	t_obs			**obs;
 }					t_map;
+void				ft_putchar(char *str);
+void				ft_putstr(char *str);
 #endif
