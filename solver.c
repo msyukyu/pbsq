@@ -1,5 +1,5 @@
 #include "bsq.h"
-
+#include <stdio.h>
 int			ft_find_x_obs(t_square *square, t_map *map)
 {
 	int		y;
@@ -12,12 +12,13 @@ int			ft_find_x_obs(t_square *square, t_map *map)
 	{
 		obs = map->obs[y];
 		while (obs != NULL)
-		{
+		{	
+//			printf("%d\n", obs->x);
 			if (square->xs + square->side - 1 < obs->x)
 				break ;
 			else if (obs->x >= square->xs && obs->x > x_max)
 				x_max = obs->x;
-			obs = map->obs[y];
+			obs = obs->next;
 		}
 	}
 	return (x_max);
@@ -55,7 +56,11 @@ void		ft_print_filled_map(t_square *best_square, t_map *map)
 	int			y;
 	
 	if (best_square == NULL)
+	{
 		write(1, "map error\n", 10);
+		return ;
+	}
+	printf("%d\n%d\n%d\n", best_square->xs, best_square->ys, best_square->side);
 	y = best_square->ys - 1;
 	while (++y < best_square->ys + best_square->side)
 	{
@@ -81,6 +86,7 @@ void		ft_solve_map(t_map *map)
 		while (square->xs < map->w - square->side + 1)
 		{
 			x_obs = ft_find_x_obs(square, map);
+//			printf("%d\n", x_obs);
 			if (x_obs == -1)
 			{
 				free(best_square);

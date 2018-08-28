@@ -56,17 +56,19 @@ t_map	*ft_check_map(t_map *map)
 					nb_check = 0;
 				else if (h > 2)
 					return (NULL);
+				continue ;
 			}
 			if (h > 0 && map->map[i] == map->c_obs)
 			{
 				current = malloc(sizeof(t_obs));
-				current->x = (h == 1) w : nb_check;
+				current->x = (h == 1) ? w : nb_check;
 				current->next = NULL;
 				if (previous == NULL)
-					map->obs[h] = current;
+					map->obs[h - 1] = current;
 				else
 					previous->next = current;
 				previous = current;
+				printf("%d, %d\n", map->obs[0]->x, h - 1);
 			}
 			if (h == 1)
 				w++;
@@ -93,7 +95,14 @@ t_map	*ft_check_map(t_map *map)
 			return (NULL);
 	}
 	if (n_lines == h - 1 && cons_length == 3)
+	{
+		map->h = n_lines;
+		map->w = w;
+		while (map->map[0] != '\n')
+			map->map += 1;
+		map->map += 1;
 		return (map);
+	}
 	return (NULL);
 }
 
