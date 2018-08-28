@@ -6,7 +6,7 @@
 /*   By: dabeloos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/28 11:45:46 by dabeloos          #+#    #+#             */
-/*   Updated: 2018/08/28 12:41:49 by dabeloos         ###   ########.fr       */
+/*   Updated: 2018/08/28 13:10:49 by rhunders         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,29 @@
 
 t_map	ft_read_map(int	fd)
 {
+	int ret;
+	int i;
+	char buff[BUFF_SIZE];
+	t_map map;
 
+	i = -1;
+	while (ret = read(FD, buff, BUFF_SIZE) > 0 && ++i > -1)
+		map.map = ft_malloc(map.map, ret, i);
+}
+
+char *ft_malloc(char *str, int ret, int size)
+{
+	char *tmp_str;
+
+	tmp_str = malloc(sizeof(char) * (size * BUFF_SIZE + ret));
+	
+}
+
+void str_cpy(char *dest, char *src)
+{
+
+	while (*dest)
+		*dest = *src;
 }
 
 int		main(int argc, char *argv[])
