@@ -134,8 +134,8 @@ int		main(int argc, char *argv[])
 				write(1, "map error\n", 10);
 			else
 			{
-				write(1, "solvemap", 8);
-				//	ft_solve_map(map);
+			//	write(1, "solvemap", 8);
+					ft_solve_map(map);
 			}
 		}
 	}
