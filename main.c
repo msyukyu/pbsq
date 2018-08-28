@@ -23,10 +23,11 @@ t_map	*ft_check_map(t_map *map, int w, int h)
 {
 	int i;
 	int size_cons; // taille de la consigne;
-	int cons_length;
+	int cons_length[2];
 	int nb_check;
 	
-	cons_length = 0;
+	cons_length[0] = 0;
+	cons_length[1] = 0;
 	size_cons = 0;
 	i = -1;
 	nb_check = 0;
@@ -37,6 +38,8 @@ t_map	*ft_check_map(t_map *map, int w, int h)
 			h++;
 			if (w == nb_check)
 				nb_check = 0;
+			else
+				return (NULL);
 		}
 		if (h == 1)
 			w++;
@@ -44,18 +47,20 @@ t_map	*ft_check_map(t_map *map, int w, int h)
 			nb_check++;
 		if (h == 0)
 		{
-			size_cons++;
-			if (map->map[i] <= '9' && map->map[i] >= '0')
-				cons_length++;
-			else
+			if (map->map[i] > '9' || map->map[i] < '0')
 			{
-
-				cons_length++;
+				if (cons_length % 3 == 0)
+					map->c_empty = map.map[i];
+				else if (cons_length % 3 == 1)
+					map->c_obs = map.map[i];
+				else
+					map->c_full = map.map[i];
+				cons_length[1]++;
 			}
-		}	
+		}
 	}
 	nb_check = ft_atoi(map->map);
-	if (nb_check == h - 1)
+	if (nb_check == h - 1 && cons_length[1] == 3)
 		return (map);
 	return (NULL);
 }
@@ -64,25 +69,14 @@ int		ft_atoi(char *str)
 {
 	int i;
 	int resultat;
-	int signe;
 
-	signe = 1;
-	i = 0;
+	i = -1;
 	resultat = 0;
-	while (str[i] == ' ' || (str[i] == '+' &&
-				(str[i + 1] > 47 && str[i + 1] < 58)))
-		i++;
-	if (str[i] == '-' && str[i + 1] > 47 && str[i + 1] < 58)
-	{
-		signe = -1;
-		i++;
-	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
+	if (str[0] < '0' || str[0] > '9')
+		return (0);
+	while (str[++i] >= '0' && str[i] <= '9')
 		resultat = resultat * 10 + str[i] - '0';
-		i++;
-	}
-	return (signe * resultat);
+	return (resultat);
 }
 
 void ft_strcpy(char *dest, char *src)
