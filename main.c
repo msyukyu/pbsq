@@ -28,6 +28,9 @@ t_map	*ft_check_map(t_map *map)
 	int nb_check;
 	int	w;
 	int	h;
+	int	n_lines;
+	t_obs *previous;
+	t_obs *current;
 
 	w = 0;
 	h = 0;
@@ -35,6 +38,10 @@ t_map	*ft_check_map(t_map *map)
 	size_cons = 0;
 	i = -1;
 	nb_check = 0;
+	n_lines = ft_atoi(map->map);
+	map->obs = malloc(sizeof(t_obs*) * n_lines);
+	current = NULL;
+	previous = NULL;
 	while(map->map[++i])
 	{
 		if (map->map[i] == map->c_full ||
@@ -42,16 +49,29 @@ t_map	*ft_check_map(t_map *map)
 		{
 			if (map->map[i] == '\n')
 			{
+				map->obs[h] = NULL;
+				previous = NULL;
 				h++;
 				if (w == nb_check)
 					nb_check = 0;
 				else if (h > 2)
 					return (NULL);
 			}
+			if (h > 0 && map->map[i] == map->c_obs)
+			{
+				current = malloc(sizeof(t_obs));
+				current->x = (h == 1) w : nb_check;
+				current->next = NULL;
+				if (previous == NULL)
+					map->obs[h] = current;
+				else
+					previous->next = current;
+				previous = current;
+			}
 			if (h == 1)
 				w++;
 			else if (h != 0)
-				nb_check++;
+				nb_check++;	
 			if (h == 0)
 			{
 				if (map->map[i] > '9' || map->map[i] < '0')
@@ -72,8 +92,7 @@ t_map	*ft_check_map(t_map *map)
 		else
 			return (NULL);
 	}
-	nb_check = ft_atoi(map->map);
-	if (nb_check == h - 1 && cons_length == 3)
+	if (n_lines == h - 1 && cons_length == 3)
 		return (map);
 	return (NULL);
 }
