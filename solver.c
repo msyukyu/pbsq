@@ -8,14 +8,14 @@ int			ft_find_x_obs(t_square *square, t_map *map)
 
 	x_max = -1;
 	y = square->ys - 1;
-	while (++y < MAP_H)
+	while (++y < map->h)
 	{
 		obs = map->obs[y];
 		while (obs != NULL)
 		{
-			if (t_square->xs + t_square->side - 1 < obs->x)
+			if (square->xs + square->side - 1 < obs->x)
 				break ;
-			else if (obs->x >= t_square->xs && obs->x > x_max)
+			else if (obs->x >= square->xs && obs->x > x_max)
 				x_max = obs->x;
 			obs = map->obs[y];
 		}
@@ -36,7 +36,7 @@ t_square	*ft_init_square(void)
 	return (square);
 }
 
-t_square	*ft_copy_square(t_square square)
+t_square	*ft_copy_square(t_square *square)
 {
 	t_square *new_square;
 
@@ -49,18 +49,18 @@ t_square	*ft_copy_square(t_square square)
 	return (new_square);
 }
 
-void		ft_print_filled_map(t_square best_square, t_map map)
+void		ft_print_filled_map(t_square *best_square, t_map *map)
 {
 	int			x;
 	int			y;
 
 	y = best_square->ys - 1;
-	while (++y < best_square-ys + best_square->side)
+	while (++y < best_square->ys + best_square->side)
 	{
 		x = best_square->xs - 1;
 		while (++x < best_square->xs + best_square->side)
 		{
-			map->map[y * (map->w + 1) + x];
+			map->map[y * (map->w + 1) + x] = map->c_full;
 		}
 	}
 	write(1, map->map, (map->w + 1) * map->h);
@@ -90,5 +90,5 @@ void		ft_solve_map(t_map *map)
 		}
 		square->ys += 1;
 	}
-	ft_print_filled_map(t_square best_square, t_map map);
+	ft_print_filled_map(best_square, map);
 }

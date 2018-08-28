@@ -5,29 +5,31 @@
 
 t_map	*ft_read_map(int	fd)
 {
-	int ret;
-	int i;
+	int n_read;
+	int n_buff;
 	char buff[BUFF_SIZE];
 	t_map *map;
 
 	map = malloc(sizeof(t_map));
-	i = -1;
-	while ((ret = read(fd, buff, BUFF_SIZE)) > 0 && ++i > -1)
-		map->map = ft_malloc(map->map, ret, i, buff);
-
+	n_buff = -1;
+	while ((n_read = read(fd, buff, BUFF_SIZE)) > 0 && ++n_buff > -1)
+		map->map = ft_malloc(map->map, n_read, n_buff, buff);
 	printf("%s\n", map->map); // test
-	return (ft_check_map (map, 0, 0));
+	return (ft_check_map (map));
 }
 
-t_map	*ft_check_map(t_map *map, int w, int h)
+t_map	*ft_check_map(t_map *map)
 {
 	int i;
 	int size_cons; // taille de la consigne;
-	int cons_length[2];
+	int cons_length;
 	int nb_check;
+	int	w;
+	int	h;
 	
-	cons_length[0] = 0;
-	cons_length[1] = 0;
+	w = 0;
+	h = 0;
+	cons_length = 0;
 	size_cons = 0;
 	i = -1;
 	nb_check = 0;
@@ -50,50 +52,26 @@ t_map	*ft_check_map(t_map *map, int w, int h)
 			if (map->map[i] > '9' || map->map[i] < '0')
 			{
 				if (cons_length % 3 == 0)
-					map->c_empty = map.map[i];
+					map->c_empty = map->map[i];
 				else if (cons_length % 3 == 1)
-					map->c_obs = map.map[i];
+					map->c_obs = map->map[i];
 				else
-					map->c_full = map.map[i];
-				cons_length[1]++;
+					map->c_full = map->map[i];
+				cons_length++;
 			}
 		}
 	}
 	nb_check = ft_atoi(map->map);
-	if (nb_check == h - 1 && cons_length[1] == 3)
+	if (nb_check == h - 1 && cons_length == 3)
 		return (map);
 	return (NULL);
 }
 
-int		ft_atoi(char *str)
-{
-	int i;
-	int resultat;
-
-	i = -1;
-	resultat = 0;
-	if (str[0] < '0' || str[0] > '9')
-		return (0);
-	while (str[++i] >= '0' && str[i] <= '9')
-		resultat = resultat * 10 + str[i] - '0';
-	return (resultat);
-}
-
-void ft_strcpy(char *dest, char *src)
-{
-	int i;
-
-	i = -1;
-	while (src[++i])
-		dest[i] = src[i];
-	dest[i] = '\0';
-}
-
-char *ft_malloc(char *str, int ret, int size, char *buff)
+char *ft_malloc(char *str, int n_read, int n_buff, char *buff)
 {
 	char *tmp_str;
 
-	tmp_str = malloc(sizeof(char) * (size * BUFF_SIZE + ret + 1));
+	tmp_str = malloc(sizeof(char) * (n_buff * BUFF_SIZE + n_read + 1));
 	ft_strcpy(tmp_str, str);
 	ft_strcat(tmp_str, buff);
 	free (str);
@@ -123,29 +101,10 @@ int		main(int argc, char *argv[])
 		if (argc == 1 || i > 0)
 		{
 			if (map == NULL)
-				ft_putstr("map error\n");
+				write(1, "map error\n", 10);
 			else
 				ft_solve_map(map);
 		}
 	}
 	return (0);
-}
-
-char	*ft_strcat(char *dest, char *src)
-{
-	int i;
-	int i2;
-
-	i = 0;
-	i2 = 0;
-	while (dest[i] != '\0')
-		i++;
-	while (src[i2] != '\0')
-	{
-		dest[i] = src[i2];
-		i++;
-		i2++;
-	}
-	dest[i] = '\0';
-	return (dest);
 }
