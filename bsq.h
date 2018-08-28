@@ -2,7 +2,7 @@
 #ifndef BSQ_H
 # define BSQ_H
 # define BUFFER_SIZE 4096
-# define MAP_SIZE (map.ye + 1)
+# define MAP_SIZE map->ye + 1
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
