@@ -68,7 +68,6 @@ t_map	*ft_check_map(t_map *map)
 				else
 					previous->next = current;
 				previous = current;
-				printf("%d, %d\n", map->obs[0]->x, h - 1);
 			}
 			if (h == 1)
 				w++;
