@@ -10,8 +10,7 @@ typedef struct		s_square
 {
 	int				xs;
 	int				ys;
-	int				w;
-	int				h;
+	int				side;
 }					t_square;
 typedef struct		s_obs
 {
