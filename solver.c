@@ -53,7 +53,9 @@ void		ft_print_filled_map(t_square *best_square, t_map *map)
 {
 	int			x;
 	int			y;
-
+	
+	if (best_square == NULL)
+		write(1, "map error\n", 10);
 	y = best_square->ys - 1;
 	while (++y < best_square->ys + best_square->side)
 	{
