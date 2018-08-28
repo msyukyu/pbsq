@@ -109,10 +109,11 @@ char *ft_malloc(char *str, int n_read, int n_buff, char *buff)
 {
 	char *tmp_str;
 
+	tmp_str = NULL;
 	tmp_str = malloc(sizeof(char) * (n_buff * BUFF_SIZE + n_read + 1));
 	ft_strcpy(tmp_str, str);
 	ft_strcat(tmp_str, buff);
-	free (str);
+//	free (str);
 	return (tmp_str);
 }
 
