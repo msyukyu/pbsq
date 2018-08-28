@@ -13,7 +13,7 @@ typedef struct		s_square
 	int				ys;
 	int				xe;
 	int				ye;
-}
+}					t_square;
 typedef struct		s_obs
 {
 	int				x;
