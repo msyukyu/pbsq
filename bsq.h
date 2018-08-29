@@ -29,8 +29,6 @@ typedef struct		s_map
 	t_obs			**obs;
 }					t_map;
 int					ft_atoi(char *str);
-void				ft_putchar(char *str);
-void				ft_putstr(char *str);
 char				*ft_strcat(char *dest, char *src);
 void				ft_strcpy(char *dest, char *src);
 int					ft_find_x_obs(t_square *square, t_map *map);
@@ -41,4 +39,8 @@ void				ft_solve_map(t_map *map);
 t_map				*ft_read_map(int fd);
 int					ft_check_map(t_map *map);
 char				*ft_malloc(char *str, int n_read, int n_buff, char *buff);
+//supprimer
+void				ft_putchar(char c);
+void				ft_putstr(char *str);
+void				ft_putnbr(int i);
 #endif

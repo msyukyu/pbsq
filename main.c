@@ -25,55 +25,54 @@ t_map	*ft_read_map(int	fd)
 	return (map);
 }
 
-void	ft_init_chain(t_map *map, t_obs *current, t_obs *previous, int i)
+void	ft_init_chain(t_map *map, t_obs *current, t_obs *previous, int var[2])
 {
-		if (map->h > 0 && map->map[i] == map->c_obs)
-		{
-			current = malloc(sizeof(t_obs));
-			current->x = (map->h == 1) ? map->w : nb_check;
-			current->next = NULL;
-			if (previous == NULL)
-				map->obs[map->h - 1] = current;
-			else
-				previous->next = current;
-			previous = current;
-		}
+	if (map->h > 0 && map->map[var[0]] == map->c_obs)
+	{
+		current = malloc(sizeof(t_obs));
+		current->x = (map->h == 1) ? map->w : var[1];
+		current->next = NULL;
+		if (previous == NULL)
+			map->obs[map->h - 1] = current;
+		else
+			previous->next = current;
+		previous = current;
+	}
 }
 
 int		ft_check_map(t_map *map)
 {
-	int i;
+	int	var[2];
 	int cons_length;
-	int nb_check;
 //	int n_lines;
 	t_obs *previous;
 	t_obs *current;
 
 	map->w = 0;
-	map->h = 0;
+	map->h = -1;
 	cons_length = 0;
-	i = -1;
-	nb_check = 0;
+	var[0] = -1;
+	var[1] = 0;
 	map->obs = malloc(sizeof(t_obs*) * ft_atoi(map->map));
 	current = NULL;
 	previous = NULL;
-	while(map->map[++i])
+	while(map->map[++var[0]])
 	{
 		//if (n_lines = ft_init_chain(map, previous, current , i) == 1)
 		//	continue ;
 		//else if (n_lines == 0)
 		//	return (0);
-		if (map->map[i] == '\n')
+		if (map->map[var[0]] == '\n')
 		{
+			map->h += 1;
 			map->obs[map->h] = NULL;
 			previous = NULL;
-			map->h += 1;
-			nb_check = 0;
-			if (map->w == nb_check && map->h > 2)
+			if (map->w != var[1] && map->h > 1)
 				return (0);
+			var[1] = 0;
 			continue ;
 		}
-		ft_init_chain(map, current, previous, i);
+		ft_init_chain(map, current, previous, var);
 /*		if (map->h > 0 && map->map[i] == map->c_obs)
 		{
 			current = malloc(sizeof(t_obs));
@@ -85,23 +84,23 @@ int		ft_check_map(t_map *map)
 				previous->next = current;
 			previous = current;
 		}*/
-		map->w = (map->h == 1) ? map->w + 1: map->w;
-		nb_check = (map->h != 0) ? nb_check + 1 : nb_check;	
-		if ((map->map[i] > '9' || map->map[i] < '0') && map->h == 0)
+		map->w = (map->h == 0) ? map->w + 1: map->w;
+		var[1] = (map->h != -1) ? var[1] + 1 : var[1];	
+		if ((map->map[var[0]] > '9' || map->map[var[0]] < '0') && map->h == -1)
 		{
-			map->c_empty = (cons_length % 3 == 0) ? map->map[i]: map->c_empty;
-			map->c_obs = (cons_length % 3 == 1) ? map->map[i]: map->c_obs;
-			map->c_full = (cons_length % 3 == 2) ? map->map[i]: map->c_full;
+			map->c_empty = (cons_length % 3 == 0) ? map->map[var[0]]: map->c_empty;
+			map->c_obs = (cons_length % 3 == 1) ? map->map[var[0]]: map->c_obs;
+			map->c_full = (cons_length % 3 == 2) ? map->map[var[0]]: map->c_full;
 			if (++cons_length == 3 && (map->c_full == map->c_obs ||
 						map->c_full == map->c_empty || map->c_obs == map->c_empty))
 				return (0);
 		}
-		if (map->map[i] != map->c_full &&
-				map->map[i] != map->c_obs &&
-				map->map[i] != map->c_empty && map->h != 0 && map->map[i] !='\n')
+		if (map->map[var[0]] != map->c_full &&
+				map->map[var[0]] != map->c_obs &&
+				map->map[var[0]] != map->c_empty && map->h != -1 && map->map[var[0]] !='\n')
 			return (0);
 	}
-	return ((ft_atoi(map->map) == map->h - 1 && cons_length == 3) ? 1 : 0);
+	return ((ft_atoi(map->map) == map->h && cons_length == 3) ? 1 : 0);
 }
 
 char	*ft_malloc(char *map, int n_read, int n_buff, char *buff)

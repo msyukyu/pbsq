@@ -41,3 +41,36 @@ char	*ft_strcat(char *dest, char *src)
 	dest[i] = '\0';
 	return (dest);
 }
+
+#include <unistd.h>
+
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
+
+void    ft_putnbr(int nb)
+{
+	int     sign;
+
+	sign = 1;
+	if (nb < 0)
+		sign = -1;
+	if (nb < 10 && nb > -10)
+	{
+		if (sign == -1)
+			ft_putchar('-');
+	}
+	else
+		ft_putnbr(nb / 10);
+	ft_putchar((nb % 10) * sign + '0');
+}
+
+void    ft_putstr(char *str)
+{
+	while (*str != '\0')
+	{
+		ft_putchar(*str);
+		str++;
+	}
+}
