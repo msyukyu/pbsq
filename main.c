@@ -6,7 +6,7 @@
 /*   By: rhunders <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/29 18:02:10 by rhunders          #+#    #+#             */
-/*   Updated: 2018/08/29 18:02:11 by rhunders         ###   ########.fr       */
+/*   Updated: 2018/08/29 18:14:10 by dabeloos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	ft_print_filled_map(t_square *best_square, t_map *map)
 
 	if (best_square == NULL)
 	{
-		write(1, "map error\n", 10);
+		write(2, "map error\n", 10);
 		return ;
 	}
 	final_map = malloc(map->n_buff * BUFF_SIZE * sizeof(char) + 1);
@@ -115,6 +115,8 @@ int		main(int argc, char *argv[])
 		}
 		if (argc == 1 || i > 0)
 			(map == NULL) ? write(2, "map error\n", 10) : ft_solve_map(map);
+		if (i < argc - 1 && i > 0)
+			write(1, "\n", 1);
 	}
 	return (0);
 }

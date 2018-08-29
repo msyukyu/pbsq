@@ -6,7 +6,7 @@
 /*   By: rhunders <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/29 18:01:56 by rhunders          #+#    #+#             */
-/*   Updated: 2018/08/29 18:02:01 by rhunders         ###   ########.fr       */
+/*   Updated: 2018/08/29 18:16:46 by dabeloos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int		ft_is_valid_char(t_map *map, t_checkmap *checkmap)
 
 	c = checkmap->segmap->seg[checkmap->i];
 	return (checkmap->h == -1 || c == '\n' || c == map->c_obs ||
-			c == map->c_full || c == map->c_empty);
+			c == map->c_empty);
 }
 
 t_map	*ft_check_char(t_map *map, t_checkmap *checkmap)
