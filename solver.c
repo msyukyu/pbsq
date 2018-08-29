@@ -1,5 +1,5 @@
 #include "bsq.h"
-#include <stdio.h>
+
 int			ft_find_x_obs(t_square *square, t_map *map)
 {
 	int		y;
