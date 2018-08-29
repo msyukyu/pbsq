@@ -6,7 +6,7 @@
 #    By: dabeloos <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/29 17:58:40 by dabeloos          #+#    #+#              #
-#    Updated: 2018/08/29 17:58:42 by dabeloos         ###   ########.fr        #
+#    Updated: 2018/08/29 18:58:52 by dabeloos         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,4 +26,4 @@ clean:
 
 fclean:		clean
 
-re:		fclean all
+re:			fclean all
