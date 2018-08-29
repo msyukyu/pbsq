@@ -25,18 +25,8 @@ t_map	*ft_read_map(int	fd)
 	return (map);
 }
 
-/*int		ft_init_chain(t_map *map, t_obs *current, t_obs *previous, int i)
+void	ft_init_chain(t_map *map, t_obs *current, t_obs *previous, int i)
 {
-		if (map->map[i] == '\n')
-		{
-			map->obs[map->h] = NULL;
-			previous = NULL;
-			map->h += 1;
-			nb_check = 0;
-			if (map->w == nb_check && map->h > 2)
-				return (0);
-			return (1)
-		}
 		if (map->h > 0 && map->map[i] == map->c_obs)
 		{
 			current = malloc(sizeof(t_obs));
@@ -48,8 +38,7 @@ t_map	*ft_read_map(int	fd)
 				previous->next = current;
 			previous = current;
 		}
-		return (2);
-}*/
+}
 
 int		ft_check_map(t_map *map)
 {
@@ -84,7 +73,8 @@ int		ft_check_map(t_map *map)
 				return (0);
 			continue ;
 		}
-		if (map->h > 0 && map->map[i] == map->c_obs)
+		ft_init_chain(map, current, previous, i);
+/*		if (map->h > 0 && map->map[i] == map->c_obs)
 		{
 			current = malloc(sizeof(t_obs));
 			current->x = (map->h == 1) ? map->w : nb_check;
@@ -94,7 +84,7 @@ int		ft_check_map(t_map *map)
 			else
 				previous->next = current;
 			previous = current;
-		}
+		}*/
 		map->w = (map->h == 1) ? map->w + 1: map->w;
 		nb_check = (map->h != 0) ? nb_check + 1 : nb_check;	
 		if ((map->map[i] > '9' || map->map[i] < '0') && map->h == 0)
