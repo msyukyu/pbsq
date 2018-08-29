@@ -4,7 +4,7 @@ C_FILES		= main.c solver.c string_utils.c
 
 FLAGS		= -Wall -Wextra -Werror
 
-$(NAME)
+$(NAME):
 		gcc -o $(NAME) $(FLAGS) $(C_FILES)
 
 all:		$(NAME)
