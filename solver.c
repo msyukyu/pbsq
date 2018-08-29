@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   solver.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dabeloos <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/08/29 17:58:18 by dabeloos          #+#    #+#             */
+/*   Updated: 2018/08/29 17:58:20 by dabeloos         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "bsq.h"
 
 int			ft_find_x_obs(t_square *square, t_map *map)
@@ -51,28 +63,6 @@ t_square	*ft_copy_square(t_square *square)
 	return (new_square);
 }
 
-void		ft_print_filled_map(t_square *best_square, t_map *map)
-{
-	int			x;
-	int			y;
-
-	if (best_square == NULL)
-	{
-		write(1, "map error\n", 10);
-		return ;
-	}
-	y = best_square->ys - 1;
-	while (++y < best_square->ys + best_square->side)
-	{
-		x = best_square->xs - 1;
-		while (++x < best_square->xs + best_square->side)
-		{
-			map->map[y * (map->w + 1) + x] = map->c_full;
-		}
-	}
-	write(1, map->map, (map->w + 1) * map->h);
-}
-
 void		ft_solve_map(t_map *map)
 {
 	t_square	*square;
@@ -84,7 +74,8 @@ void		ft_solve_map(t_map *map)
 	while (square->ys < map->h - square->side + 1)
 	{
 		square->xs = 0;
-		while (square->xs < map->w - square->side + 1 && square->ys < map->h - square->side + 1)
+		while (square->xs < map->w - square->side + 1 &&
+				square->ys < map->h - square->side + 1)
 		{
 			x_obs = ft_find_x_obs(square, map);
 			if (x_obs == -1)
