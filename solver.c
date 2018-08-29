@@ -12,7 +12,7 @@ int			ft_find_x_obs(t_square *square, t_map *map)
 	{
 		obs = map->obs[y];
 		while (obs != NULL)
-		{	
+		{
 			if (square->xs + square->side - 1 < obs->x)
 				break ;
 			else if (obs->x >= square->xs && obs->x > x_max)
@@ -55,7 +55,7 @@ void		ft_print_filled_map(t_square *best_square, t_map *map)
 {
 	int			x;
 	int			y;
-	
+
 	if (best_square == NULL)
 	{
 		write(1, "map error\n", 10);
@@ -78,7 +78,7 @@ void		ft_solve_map(t_map *map)
 	t_square	*square;
 	t_square	*best_square;
 	int			x_obs;
-	
+
 	square = ft_init_square();
 	best_square = NULL;
 	while (square->ys < map->h - square->side + 1)

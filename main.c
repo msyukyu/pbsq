@@ -1,14 +1,12 @@
-
-#include <stdio.h> // a retirer
-
+#include <stdio.h>
 #include "bsq.h"
 
 t_map	*ft_read_map(int	fd)
 {
-	int n_read;
-	int n_buff;
-	char buff[BUFF_SIZE + 1];
-	t_map *map;
+	int		n_read;
+	int		n_buff;
+	char	buff[BUFF_SIZE + 1];
+	t_map	*map;
 
 	map = malloc(sizeof(t_map));
 	n_buff = -1;
@@ -16,7 +14,7 @@ t_map	*ft_read_map(int	fd)
 	map->map[0] = '\0';
 	while ((n_read = read(fd, buff, BUFF_SIZE)) > 0 && ++n_buff > -1)
 		map->map = ft_malloc(map->map, n_read, n_buff, buff);
-	printf("%s\n", map->map); // test
+//	printf("%s\n", map->map); // test
 	return (ft_check_map(map));
 }
 
@@ -105,7 +103,7 @@ t_map	*ft_check_map(t_map *map)
 	return (NULL);
 }
 
-char *ft_malloc(char *map, int n_read, int n_buff, char *buff)
+char	*ft_malloc(char *map, int n_read, int n_buff, char *buff)
 {
 	char *new_map;
 
@@ -113,7 +111,7 @@ char *ft_malloc(char *map, int n_read, int n_buff, char *buff)
 	buff[n_read] = '\0';
 	ft_strcpy(new_map, map);
 	ft_strcat(new_map, buff);
-	free (map);
+	free(map);
 	return (new_map);
 }
 

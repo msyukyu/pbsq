@@ -1,4 +1,5 @@
-int     ft_atoi(char *str)
+
+int		ft_atoi(char *str)
 {
 	int i;
 	int resultat;
@@ -12,7 +13,7 @@ int     ft_atoi(char *str)
 	return (resultat);
 }
 
-void ft_strcpy(char *dest, char *src)
+void	ft_strcpy(char *dest, char *src)
 {
 	int i;
 
@@ -22,7 +23,7 @@ void ft_strcpy(char *dest, char *src)
 	dest[i] = '\0';
 }
 
-char    *ft_strcat(char *dest, char *src)
+char	*ft_strcat(char *dest, char *src)
 {
 	int i;
 	int i2;
