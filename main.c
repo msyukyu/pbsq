@@ -6,7 +6,7 @@
 /*   By: rhunders <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/29 18:02:10 by rhunders          #+#    #+#             */
-/*   Updated: 2018/08/29 18:14:10 by dabeloos         ###   ########.fr       */
+/*   Updated: 2018/08/29 18:40:24 by dabeloos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	ft_print_filled_map(t_square *best_square, t_map *map)
 	while (current != NULL)
 	{
 		ft_strcat(final_map, current->seg);
+		free(current->seg);
 		current = current->next;
 	}
 	ft_fill_map(best_square, map, final_map);
