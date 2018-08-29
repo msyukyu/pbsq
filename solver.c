@@ -83,6 +83,7 @@ void		ft_solve_map(t_map *map)
 	best_square = NULL;
 	while (square->ys < map->h - square->side + 1)
 	{
+		square->xs = 0;
 		while (square->xs < map->w - square->side + 1)
 		{
 			x_obs = ft_find_x_obs(square, map);
