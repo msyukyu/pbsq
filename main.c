@@ -14,7 +14,6 @@ t_map	*ft_read_map(int	fd)
 	map->map[0] = '\0';
 	while ((n_read = read(fd, buff, BUFF_SIZE)) > 0 && ++n_buff > -1)
 		map->map = ft_malloc(map->map, n_read, n_buff, buff);
-//	printf("%s\n", map->map); // test
 	return (ft_check_map(map));
 }
 
