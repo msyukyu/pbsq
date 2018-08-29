@@ -58,7 +58,7 @@ void		ft_print_filled_map(t_square *best_square, t_map *map)
 	
 	if (best_square == NULL)
 	{
-		write(1, "ymap error\n", 10);
+		write(1, "map error\n", 10);
 		return ;
 	}
 	y = best_square->ys - 1;

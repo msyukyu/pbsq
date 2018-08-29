@@ -17,7 +17,7 @@ t_map	*ft_read_map(int	fd)
 	while ((n_read = read(fd, buff, BUFF_SIZE)) > 0 && ++n_buff > -1)
 		map->map = ft_malloc(map->map, n_read, n_buff, buff);
 	printf("%s\n", map->map); // test
-	return (ft_check_map (map));
+	return (ft_check_map(map));
 }
 
 t_map	*ft_check_map(t_map *map)
@@ -105,16 +105,16 @@ t_map	*ft_check_map(t_map *map)
 	return (NULL);
 }
 
-char *ft_malloc(char *str, int n_read, int n_buff, char *buff)
+char *ft_malloc(char *map, int n_read, int n_buff, char *buff)
 {
-	char *tmp_str;
+	char *new_map;
 
-	tmp_str = malloc(sizeof(char) * (n_buff * BUFF_SIZE + n_read + 1));
+	new_map = malloc(sizeof(char) * (n_buff * BUFF_SIZE + n_read + 1));
 	buff[n_read] = '\0';
-	ft_strcpy(tmp_str, str);
-	ft_strcat(tmp_str, buff);
-	free (str);
-	return (tmp_str);
+	ft_strcpy(new_map, map);
+	ft_strcat(new_map, buff);
+	free (map);
+	return (new_map);
 }
 
 int		main(int argc, char *argv[])
@@ -138,15 +138,7 @@ int		main(int argc, char *argv[])
 				map = NULL;
 		}
 		if (argc == 1 || i > 0)
-		{
-			if (map == NULL)
-				write(1, "map error\n", 10);
-			else
-			{
-			//	write(1, "solvemap", 8);
-					ft_solve_map(map);
-			}
-		}
+			(map == NULL) ? write(1, "map error\n", 10) : ft_solve_map(map);
 	}
 	return (0);
 }
